@@ -1,4 +1,5 @@
 import { Sequelize, DataTypes, Op } from 'sequelize';
+import defineWishlistModel from './Wishlist.js';
 
 export const defineModels = (sequelize) => {
   // 1. User
@@ -503,6 +504,8 @@ export const defineModels = (sequelize) => {
     timestamps: true
   });
 
+  const Wishlist = defineWishlistModel(sequelize);
+
   // 10. Inventory Transaction
   const InventoryTransaction = sequelize.define('InventoryTransaction', {
     id: {
@@ -816,6 +819,11 @@ export const defineModels = (sequelize) => {
   Product.hasMany(Review, { foreignKey: 'product_id', as: 'reviews', onDelete: 'CASCADE' });
   Review.belongsTo(Product, { foreignKey: 'product_id' });
 
+  User.hasMany(Wishlist, { foreignKey: 'user_id', as: 'wishlistItems', onDelete: 'CASCADE' });
+  Wishlist.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+  Product.hasMany(Wishlist, { foreignKey: 'product_id', as: 'wishlistEntries', onDelete: 'CASCADE' });
+  Wishlist.belongsTo(Product, { foreignKey: 'product_id', as: 'product' });
+
   Product.hasMany(InventoryTransaction, { foreignKey: 'product_id', as: 'inventory_transactions', onDelete: 'CASCADE' });
   InventoryTransaction.belongsTo(Product, { foreignKey: 'product_id' });
 
@@ -835,6 +843,7 @@ export const defineModels = (sequelize) => {
     Order,
     OrderItem,
     Coupon,
+    Wishlist,
     InventoryTransaction,
     Review,
     StoreSetting,

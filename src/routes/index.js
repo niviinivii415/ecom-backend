@@ -13,6 +13,7 @@ import { createNotificationRouter } from './notificationRoutes.js';
 import { createAdminRouter } from './adminRoutes.js';
 import { createUserRouter } from './user.routes.js';
 import { createStoreRouter } from './store.routes.js';
+import { createWishlistRouter } from './wishlist.routes.js';
 
 export const setupRoutes = (app, models) => {
   const apiRouter = express.Router();
@@ -31,6 +32,7 @@ export const setupRoutes = (app, models) => {
   apiRouter.use('/admin', createAdminRouter(models));
   apiRouter.use('/admin/uploads', createUploadRouter(models));
   apiRouter.use('/store', createStoreRouter(models));
+  apiRouter.use('/wishlist', createWishlistRouter(models));
 
   app.use('/api', apiRouter);
 };

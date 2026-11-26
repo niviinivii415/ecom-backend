@@ -16,6 +16,7 @@ import { createUploadRouter } from './routes/uploadRoutes.js';
 import { createReviewRouter } from './routes/reviewRoutes.js';
 import { createInquiryRouter } from './routes/inquiryRoutes.js';
 import { createNotificationRouter } from './routes/notificationRoutes.js';
+import { createWishlistRouter } from './routes/wishlist.routes.js';
 import { getStoreSettings } from './controllers/adminController.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -114,6 +115,7 @@ export const createApp = (models) => {
   app.use('/api/inquiries', createInquiryRouter(models));
   app.use('/api/notifications', createNotificationRouter(models));
   app.use('/api/admin/notifications', createNotificationRouter(models));
+  app.use('/api/wishlist', createWishlistRouter(models));
 
   // 404 handler for unknown API routes
   app.use('/api/*', (req, res) => {

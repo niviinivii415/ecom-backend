@@ -7,7 +7,8 @@ export default (sequelize) => {
     product_id: { type: DataTypes.INTEGER, allowNull: false }
   }, {
     tableName: 'wishlists',
-    timestamps: true
+    timestamps: true,
+    indexes: [{ unique: true, fields: ['user_id', 'product_id'] }]
   });
 };
 
